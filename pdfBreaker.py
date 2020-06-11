@@ -16,7 +16,7 @@ print(f"The PDF file is encrypted: {pdf.isEncrypted}")
 
 #todo try each string as a password for a decrypt call to the pdf, if we find the password break the loop and print the password
 for word in dictionaryList:
-    print(f"Trying upper and lowercase versions: \"{str.upper(word)}\" \"{str.lower(word)}\"")
+    #print(f"Trying upper and lowercase versions: \"{str.upper(word)}\" \"{str.lower(word)}\"")
 
     if pdf.decrypt(word.lower()):
         print("######################################")
