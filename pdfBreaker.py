@@ -6,8 +6,8 @@ import os, PyPDF2
 
 #Load dictionary file and pdf we will be attacking
 print('Loading dictionary from dictionary.txt...')
-dictionaryFile = open('dictionary.txt')
-dictionaryList = dictionaryFile.readlines()
+with open('dictionary.txt') as f:
+    dictionaryList = [line.rstrip() for line in f]
 
 print('Loading target PDF file from encrypted.pdf...')
 pdfFile = open('encrypted.pdf', 'rb')
@@ -16,7 +16,16 @@ print(f"The PDF file is encrypted: {pdf.isEncrypted}")
 
 #todo try each string as a password for a decrypt call to the pdf, if we find the password break the loop and print the password
 for word in dictionaryList:
-    print(f"Trying upper and lowercase versions of: {word}.")
-    if pdf.decrypt(str.upper(word)) == '1' or pdf.decrypt(str.lower(word)) == '1':
-        print(f"The password is {word}.")
-        break
+    print(f"Trying upper and lowercase versions: \"{str.upper(word)}\" \"{str.lower(word)}\"")
+
+    if pdf.decrypt(word.lower()):
+        print("######################################")
+        print(f"The password is {word.lower()}.")  
+        print("######################################")
+    elif pdf.decrypt(word.upper()):
+        print("######################################")
+        print(f"The password is {word.upper()}.")
+        print("######################################")
+
+pdfFile.close()
+f.close()
