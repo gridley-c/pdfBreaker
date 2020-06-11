@@ -22,10 +22,12 @@ for word in dictionaryList:
         print("######################################")
         print(f"The password is {word.lower()}.")  
         print("######################################")
+        break
     elif pdf.decrypt(word.upper()):
         print("######################################")
         print(f"The password is {word.upper()}.")
         print("######################################")
+        break
 
 pdfFile.close()
 f.close()
